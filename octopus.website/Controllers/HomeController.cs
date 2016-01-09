@@ -31,5 +31,11 @@ namespace octopus.website.Controllers
         {
             return View("~/Views/Shared/Error.cshtml");
         }
+
+		[HttpPost]
+		public IActionResult Execute()
+		{
+			return View();
+		}
     }
 }
