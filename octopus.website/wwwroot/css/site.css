@@ -14,7 +14,8 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    font-family: 'Lucida Console';
+	font-size: 14px;
 }
 
 /* Carousel */
@@ -31,4 +32,15 @@ textarea {
     .carousel-caption {
         z-index: 10 !important;
     }
+}
+
+
+.sql_input {
+	width: 100%;
+}
+
+.exec_button {
+	margin-top: 10px;
+	color: #999999;
+	background-color: #101010;
 }
