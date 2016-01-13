@@ -5380,7 +5380,9 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta5",
       "CodeMirror >= 2.37.0"
     ],
-    "DNX,Version=v4.5.1": [],
+    "DNX,Version=v4.5.1": [
+      "Octopus.DAL >= 1.0.0-*"
+    ],
     "DNXCore,Version=v5.0": []
   }
 }

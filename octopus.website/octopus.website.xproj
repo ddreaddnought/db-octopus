@@ -15,5 +15,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <DevelopmentServerPort>59225</DevelopmentServerPort>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Octopus.DAL\Octopus.DAL.csproj" />
+    <ProjectReference Include="..\octopus.Data\octopus.Data.csproj" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>
