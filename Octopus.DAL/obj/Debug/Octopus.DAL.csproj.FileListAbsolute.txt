@@ -1,5 +1,0 @@
-E:\github\db-octopus\Octopus.DAL\bin\Debug\Octopus.DAL.dll
-E:\github\db-octopus\Octopus.DAL\bin\Debug\Octopus.DAL.pdb
-E:\github\db-octopus\Octopus.DAL\obj\Debug\Octopus.DAL.csprojResolveAssemblyReference.cache
-E:\github\db-octopus\Octopus.DAL\obj\Debug\Octopus.DAL.dll
-E:\github\db-octopus\Octopus.DAL\obj\Debug\Octopus.DAL.pdb
