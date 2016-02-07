@@ -1,0 +1,38 @@
+﻿@model IEnumerable<octopus.DAL.SqlQuery>
+
+@{
+    ViewBag.Title = "My queries history";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Queries history</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEnd)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Id, "Execute", "Query", new { id = item.Id }, new { target = "_blank" })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEnd)
+        </td>
+    </tr>
+}
+
+</table>

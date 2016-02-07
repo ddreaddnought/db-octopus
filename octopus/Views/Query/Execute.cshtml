@@ -1,0 +1,12 @@
+﻿@model octopus.Models.RunningQueryViewModel
+
+@{
+	var state = Model.Done ? "completed" : "running";
+	ViewBag.Title = string.Format("{0}: {1}", state, Model.Id);
+}
+
+<div style="margin-top:20px;">
+	<img src="~/Content/img/spinner.gif" /><b> @state query "@Html.DisplayFor(model => model.Id)"</b>
+	<br />
+	<b style="font-size: 12px;">elapsed time: @Html.DisplayFor(model => model.RunningTime)</b>
+</div>

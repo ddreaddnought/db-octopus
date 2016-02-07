@@ -1,0 +1,39 @@
+﻿@model octopus.DAL.PreparedScript
+
+@{
+    ViewBag.Title = "Delete script";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete script</h2>
+
+<h3>Are you sure you want to delete script?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sql)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sql)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
