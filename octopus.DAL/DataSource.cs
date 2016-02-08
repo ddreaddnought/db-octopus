@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace octopus.DAL
 {
@@ -11,6 +12,7 @@ namespace octopus.DAL
 		/// <summary>
 		/// MS SQL Server intstance address
 		/// </summary>
+		[Key]
 		[Column("address")]
 		public string Address { get; set; }
 		
