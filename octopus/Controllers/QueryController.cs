@@ -15,24 +15,24 @@ namespace octopus.Controllers
 		private OctopusDbContext _dbContext = new OctopusDbContext();
 
 		[HttpPost]
-        public ActionResult Execute(QueryViewModel query)
+        public ActionResult Execute(SqlQuery query)
         {
-			SqlQuery sqlQuery = new SqlQuery()
-			{
-				Id = query.Id,
-				UserId = UserInfo.UserId(User.Identity),
-				DateStart = DateTime.Now
-			};
+			query.UserId = UserHelper.GetUserId(User.Identity);
+			query.DateStart = DateTime.Now;
+			Worker.ExecuteQuery(query);
 
-			_dbContext.Queries.Add(sqlQuery);
+			_dbContext.Queries.Add(query);
 			_dbContext.SaveChanges();
 
 			return Redirect(string.Format("~/Query/Execute/{0}", query.Id));
         }
 
-		public ActionResult Execute(string id)
+		public ActionResult Execute(int id)
 		{
-			var model = _dbContext.Queries.Where(q => q.Id == id).FirstOrDefault();
+			var model = _dbContext
+				.Queries
+				.Where(q => q.Id == id)
+				.FirstOrDefault();
 			var viewModel = new RunningQueryViewModel(model);
 
 			if(!viewModel.Done)

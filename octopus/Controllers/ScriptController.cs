@@ -38,7 +38,7 @@ namespace octopus.Controllers
 		/// <returns></returns>
 		public ActionResult Index()
         {
-			int userId = UserInfo.UserId(User.Identity);
+			int userId = UserHelper.GetUserId(User.Identity);
 			var scripts = _dbContext
 				.PreparedScripts
 				.Where(s => s.UserId == userId);
@@ -71,7 +71,7 @@ namespace octopus.Controllers
 			}
 			else
 			{
-				script.UserId = UserInfo.UserId(User.Identity);
+				script.UserId = UserHelper.GetUserId(User.Identity);
 				_dbContext.PreparedScripts.Add(script);
 			}
 

@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using octopus.Helpers;
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -6,6 +8,10 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+		@if(UserHelper.IsAdmin(User.Identity))
+		{
+			<li>@Html.ActionLink("Add user", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+		}
         <li>@Html.ActionLink("Log off \"" + User.Identity.GetUserName() + "\"" , "LogOff", "Account")</li>
     </ul>
     }
@@ -13,7 +19,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

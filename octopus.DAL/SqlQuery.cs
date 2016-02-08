@@ -13,7 +13,7 @@ namespace octopus.DAL
 	{
 		[Key]
 		[Column("id")]
-		public string Id { get; set; }
+		public int Id { get; set; }
 
 		[Column("id_user")]
 		public int UserId { get; set; }
@@ -23,5 +23,14 @@ namespace octopus.DAL
 
 		[Column("dt_end")]
 		public DateTime? DateEnd { get; set; }
+		
+		[Column("databases")]
+		public string Databases { get; set; }
+
+		[Column("prepared_script_name")]
+		public string PreparedScriptName { get; set; }
+
+		[Column("sql")]
+		public string Sql { get; set; }
 	}
 }

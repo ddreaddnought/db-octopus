@@ -143,11 +143,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\UserInfo.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\PreparedScripts\ExecuteScriptViewModel.cs" />
     <Compile Include="Models\LoginViewModels.cs" />
     <Compile Include="Models\PreparedScripts\PreparedScriptParameter.cs" />
-    <Compile Include="Models\QueryViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RunningQueryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

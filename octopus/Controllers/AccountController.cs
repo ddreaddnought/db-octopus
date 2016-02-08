@@ -40,11 +40,12 @@ namespace octopus.Controllers
 				return View(model);
 			}
 
-			// This doesn't count login failures towards account lockout
-			// To enable password failures to trigger account lockout, change to shouldLockout: true
-
 			string passwordHash = GetEncodedHash(model.Password);
-            Account result = _dbContext.Accounts.Where(a => a.Email == model.Email && a.Password == passwordHash).FirstOrDefault();
+            Account result = _dbContext
+				.Accounts
+				.Where(a => a.Email == model.Email && a.Password == passwordHash)
+				.FirstOrDefault();
+
 			if (result != null)
 			{
 				FormsAuthentication.SetAuthCookie(result.Name, true);
@@ -59,7 +60,6 @@ namespace octopus.Controllers
 
 		//
 		// GET: /Account/Register
-		[AllowAnonymous]
 		public ActionResult Register()
 		{
 			return View();
@@ -68,7 +68,6 @@ namespace octopus.Controllers
 		//
 		// POST: /Account/Register
 		[HttpPost]
-		[AllowAnonymous]
 		public ActionResult Register(RegisterViewModel model)
 		{
 			if (ModelState.IsValid)
@@ -104,14 +103,6 @@ namespace octopus.Controllers
 		{
 			FormsAuthentication.SignOut();
 			return RedirectToAction("Index", "Home");
-		}
-
-		//
-		// GET: /Account/ExternalLoginFailure
-		[AllowAnonymous]
-		public ActionResult ExternalLoginFailure()
-		{
-			return View();
 		}
 
 		protected override void Dispose(bool disposing)

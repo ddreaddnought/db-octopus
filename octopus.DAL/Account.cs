@@ -23,5 +23,8 @@ namespace octopus.DAL
 
 		[Column("email")]
 		public string Email { get; set; }
+
+		[Column("is_admin")]
+		public bool IsAdmin { get; set; }
 	}
 }

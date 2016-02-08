@@ -16,7 +16,7 @@ namespace octopus.Controllers
         {
 			var dbContext = new OctopusDbContext();
 
-			int userId = UserInfo.UserId(User.Identity);
+			int userId = UserHelper.GetUserId(User.Identity);
 
             return View(dbContext
 				.Queries

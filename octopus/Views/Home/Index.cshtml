@@ -1,4 +1,4 @@
-﻿@model octopus.Models.QueryViewModel
+﻿@model octopus.DAL.SqlQuery
 
 @{
     ViewBag.Title = "Octopus project";
@@ -11,19 +11,33 @@
  
 @using (Html.BeginForm("Execute", "Query", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-	<div style="margin-top: 50px;">
-		@Html.TextAreaFor(m => m.Sql, new { id = "query", rows = "20", Class = "sql_input" })
-	</div>
-	<div>
-		<input type="submit" class="btn btn-default exec_button" value="Execute" formtarget="_blank"  />
+	<div class="form-horizontal" style="margin-top: 30px">
+		<div class="form-group">
+			@Html.LabelFor(m => m.Databases, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(m => m.Databases, new { htmlAttributes = new { @class = "form-control" } })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Sql, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.TextAreaFor(m => m.Sql, new { id = "query", rows = "20", Class = "sql_input" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Execute" class="btn btn-default" />
+			</div>
+		</div>
 	</div>
 }
 
-<script>
-	var editor = CodeMirror.fromTextArea(document.getElementById("query"), {
-		lineNumbers: true,
-		matchBrackets: true,
-		mode: "text/x-sql",
-		theme: "abcdef"
-	});
-</script> 
+		<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("query"), {
+				lineNumbers: true,
+				matchBrackets: true,
+				mode: "text/x-sql",
+				theme: "abcdef"
+			});
+		</script>
