@@ -24,7 +24,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink(item.Id, "Execute", "Query", new { id = item.Id }, new { target = "_blank" })
+            @Html.ActionLink(item.Id.ToString()	, "Execute", "Query", new { id = item.Id }, new { target = "_blank" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateStart)
