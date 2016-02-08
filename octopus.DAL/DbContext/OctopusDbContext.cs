@@ -24,5 +24,6 @@ namespace octopus.DAL
 		public DbSet<Account> Accounts { get; set; }
 		public DbSet<PreparedScript> PreparedScripts { get; set; }
 		public DbSet<DataSource> DataSources { get; set; }
+		public DbSet<SqlQueryResult> QueryResults { get; set; }
 	}
 }
