@@ -36,7 +36,7 @@ namespace octopus.Controllers
 			var viewModel = new RunningQueryViewModel(model);
 
 			if(!viewModel.Done)
-				HttpContext.Response.AddHeader("refresh", "5");
+				HttpContext.Response.AddHeader("refresh", "2");
 			return View(viewModel);
 		}
 	}
