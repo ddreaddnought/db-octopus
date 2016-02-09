@@ -1,4 +1,6 @@
-﻿using octopus.DAL;
+﻿using Newtonsoft.Json;
+using octopus.DAL;
+using octopus.DAL.WorkerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,21 @@ namespace octopus.Models
 				: DateTime.Now - DateStart;
 
 			RunningTime = runningTime.ToString(@"dd\.hh\:mm\:ss");
-        }
+
+			Results = new List<WorkerResult>();
+			using (var dbContext = new OctopusDbContext())
+			{
+				var tmpResults = dbContext
+					.QueryResults
+					.Where(qr => qr.QueryId == Id)
+					.ToList();
+                foreach (var tmpResult in tmpResults)
+					Results.Add(JsonConvert.DeserializeObject<WorkerResult>(tmpResult.Result));
+			}
+		}
 
 		public bool Done { get; private set; }
 		public string RunningTime { get; private set; }
+		public List<WorkerResult> Results { get; private set; }
 	}
 }
