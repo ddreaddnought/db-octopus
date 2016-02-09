@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace octopus.Models
 {
@@ -11,7 +12,6 @@ namespace octopus.Models
 
 		public string Name { get; set; }
 		public string Databases { get; set; }
-		public string Sql { get; set; }
 		public List<PreparedScriptParameter> Params { get; private set; }
 	}
 }

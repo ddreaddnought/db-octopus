@@ -126,9 +126,36 @@ namespace octopus.Controllers
 
 			var executeScript = new ExecuteScriptViewModel();
 			executeScript.Name = script.Name;
-			executeScript.Sql = script.Sql;
 
 			return View("Execute", executeScript);
 		}
-    }
+
+		/// <summary>
+		/// Execute script
+		/// </summary>
+		[HttpPost]
+		public ActionResult Execute(int id, ExecuteScriptViewModel executeScript)
+		{
+			if (!string.IsNullOrEmpty(executeScript.Databases))
+			{
+				var script = GetScriptById(id);
+
+				var sqlQuery = new SqlQuery();
+				sqlQuery.Databases = executeScript.Databases;
+				sqlQuery.PreparedScriptName = script.Name;
+				sqlQuery.Sql = script.Sql;
+				sqlQuery.DateStart = DateTime.Now;
+				sqlQuery.UserId = UserHelper.GetUserId(User.Identity);
+
+				_dbContext.Queries.Add(sqlQuery);
+				_dbContext.SaveChanges();
+
+				Worker.ExecuteQuery(sqlQuery);
+
+				return RedirectToAction("Execute", "Query", new { id = sqlQuery.Id });
+			}
+			else
+				return View(executeScript);
+		}
+	}
 }
