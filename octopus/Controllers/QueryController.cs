@@ -19,10 +19,10 @@ namespace octopus.Controllers
         {
 			query.UserId = UserHelper.GetUserId(User.Identity);
 			query.DateStart = DateTime.Now;
-			Worker.ExecuteQuery(query);
-
 			_dbContext.Queries.Add(query);
 			_dbContext.SaveChanges();
+
+			Worker.ExecuteQuery(query);
 
 			return Redirect(string.Format("~/Query/Execute/{0}", query.Id));
         }

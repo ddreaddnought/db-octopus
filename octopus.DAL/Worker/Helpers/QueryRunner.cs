@@ -92,33 +92,47 @@ namespace octopus.DAL.WorkerHelpers
 		private void DatabaseThread(object db)
 		{
 			var database = (WorkerDb)db;
-			var adapter = new SqlDataAdapter(_query.Sql, database.ConnectionString);
-			var table = new DataTable();
-			adapter.Fill(table);
-
-			var result = new WorkerResult();
-			result.DatabaseId = database.Id;
-
-			foreach (DataColumn column in table.Columns)
-				result.AppendColumn(column.Caption);
-
-			foreach (DataRow row in table.Rows)
-				result.AppendRow(row.ItemArray);
-
-			_results.Add(result);
 
 			var queryResult = new SqlQueryResult();
 			queryResult.QueryId = _query.Id;
 			queryResult.DatabaseId = database.Id;
-			queryResult.Result = JsonConvert.SerializeObject(result);
 
-			using (var dbContext = new OctopusDbContext())
+			try
 			{
-				dbContext.QueryResults.Add(queryResult);
-				dbContext.SaveChanges();
-			}
+				var adapter = new SqlDataAdapter(_query.Sql, database.ConnectionString);
+				var table = new DataTable();
+				adapter.Fill(table);
 
-			Interlocked.Decrement(ref _countdown);
+				var result = new WorkerResult();
+				result.DatabaseId = database.Id;
+
+				foreach (DataColumn column in table.Columns)
+					result.AppendColumn(column.Caption);
+
+				foreach (DataRow row in table.Rows)
+					result.AppendRow(row.ItemArray);
+
+				_results.Add(result);
+				queryResult.Result = JsonConvert.SerializeObject(result);
+			}
+			catch (Exception ex)
+			{
+				var result = new WorkerResult();
+				result.DatabaseId = database.Id;
+				result.AppendColumn("error");
+				result.AppendRow(new object[] { ex.Message });
+
+				queryResult.Result = JsonConvert.SerializeObject(result);
+			}
+			finally
+			{
+				using (var dbContext = new OctopusDbContext())
+				{
+					dbContext.QueryResults.Add(queryResult);
+					dbContext.SaveChanges();
+				}
+				Interlocked.Decrement(ref _countdown);
+			}
 		}
 	}
 }
