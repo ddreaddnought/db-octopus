@@ -14,6 +14,8 @@ namespace octopus.Models
 		public RunningQueryViewModel(SqlQuery baseModel)
 		{
 			Id = baseModel.Id;
+			Sql = baseModel.Sql;
+			Databases = baseModel.Databases;
 			UserId = baseModel.UserId;
 			DateStart = baseModel.DateStart;
 			DateEnd = baseModel.DateEnd;

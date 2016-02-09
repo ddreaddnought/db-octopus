@@ -5,6 +5,11 @@
 	ViewBag.Title = string.Format("{0}: {1}", state, Model.Id);
 }
 
+<script src="~/Scripts/CodeMirror/lib/codemirror.js"></script>
+<script src="~/Scripts/CodeMirror/mode/sql/sql.js" type="text/javascript"></script>
+<link href="~/Scripts/CodeMirror/lib/codemirror.css" rel="stylesheet" type="text/css" />
+<link href="~/Scripts/CodeMirror/theme/neat.css" rel="stylesheet" type="text/css" />
+
 <div style="margin-top:20px;">
 	@if (!Model.Done)
 	{
@@ -13,6 +18,21 @@
 	<b> @state query "@Html.DisplayFor(model => model.Id)"</b>
 	<br />
 	<b style="font-size: 12px;">elapsed time: @Html.DisplayFor(model => model.RunningTime)</b>
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			@Html.LabelFor(m => m.Databases, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(m => m.Databases, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Sql, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.TextAreaFor(m => m.Sql, new { id = "query", rows = "20", Class = "sql_input" })
+			</div>
+		</div>
+	</div>
 
 	@foreach (var result in Model.Results)
 	{
@@ -37,3 +57,13 @@
 		</table>
 	}
 </div>
+
+<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("query"), {
+				lineNumbers: true,
+				matchBrackets: true,
+				mode: "text/x-mssql",
+				theme: "neat",
+				readOnly: true
+			});
+</script>

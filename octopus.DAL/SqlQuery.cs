@@ -24,6 +24,7 @@ namespace octopus.DAL
 		[Column("dt_end")]
 		public DateTime? DateEnd { get; set; }
 		
+		[Required]
 		[Column("databases")]
 		public string Databases { get; set; }
 
