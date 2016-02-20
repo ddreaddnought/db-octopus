@@ -48,7 +48,6 @@ namespace octopus.Controllers
 
 			if (result != null)
 			{
-				FormsAuthentication.SetAuthCookie(result.Name, true);
 				return RedirectToAction("Index", "Home");
 			}
 			else
