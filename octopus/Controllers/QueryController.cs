@@ -15,8 +15,13 @@ namespace octopus.Controllers
 		private OctopusDbContext _dbContext = new OctopusDbContext();
 
 		[HttpPost]
-        public ActionResult Execute(SqlQuery query)
+        public ActionResult Execute(UserQueryViewModel userQuery)
         {
+			SqlQuery query = new SqlQuery();
+			query.PreparedScriptName = PreparedScriptHelper.Get(userQuery.PreparedScriptId).Name;
+			query.Databases = userQuery.Databases;
+			query.Sql = PreparedScriptHelper.SetParams(userQuery.Sql, userQuery.Params);
+
 			query.UserId = UserHelper.GetUserId(User.Identity);
 			query.DateStart = DateTime.Now;
 			_dbContext.Queries.Add(query);

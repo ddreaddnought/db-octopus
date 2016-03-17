@@ -1,4 +1,4 @@
-﻿@model octopus.DAL.SqlQuery
+﻿@model octopus.Models.UserQueryViewModel
 
 @{
     ViewBag.Title = "Octopus project";
@@ -9,7 +9,7 @@
 <link href="~/Scripts/CodeMirror/lib/codemirror.css" rel="stylesheet" type="text/css" />
 <link href="~/Scripts/CodeMirror/theme/neat.css" rel="stylesheet" type="text/css" />
  
-@using (Html.BeginForm("Execute", "Query", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Execute", "Query", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { RedeemTransaction = Model, @class = "form-horizontal", role = "form" }))
 {
 	@Html.AntiForgeryToken()
 	<h2>Run your custom query</h2>
@@ -22,12 +22,38 @@
 				@Html.EditorFor(m => m.Databases, new { htmlAttributes = new { @class = "form-control" } })
 			</div>
 		</div>
+
+		<div class="form-group">
+			@Html.Label("Predefined script:", htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(m => m.PreparedScriptId, @octopus.Helpers.PreparedScriptHelper.GetScripts(),
+					new
+					{
+						@class = "form-control",
+						@onchange = "{ this.form.action='/'; this.form.submit(); }"
+					})
+			</div>
+		</div>
+
 		<div class="form-group">
 			@Html.LabelFor(m => m.Sql, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.TextAreaFor(m => m.Sql, new { id = "query", rows = "20", Class = "sql_input" })
+				@Html.TextAreaFor(m => m.Sql, new { id = "query" } )
 			</div>
 		</div>
+
+		@if(Model != null)
+		{ 
+			for (int i = 0; i < Model.Params.Count; i++)
+			{
+				<div class="form-group">
+					@Html.Label(Model.Params[i].Name, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.TextBoxFor(m => m.Params[i].Value, new { id = "query" })
+					</div>
+				</div>
+			}
+		}
 
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
@@ -37,6 +63,8 @@
 	</div>
 }
 
+@if (Model == null || Model.PreparedScriptId == 0)
+{
 		<script>
 			var editor = CodeMirror.fromTextArea(document.getElementById("query"), {
 				lineNumbers: true,
@@ -45,6 +73,19 @@
 				theme: "neat"
 			});
 		</script>
+}
+else
+{
+	<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("query"), {
+				lineNumbers: true,
+				matchBrackets: true,
+				mode: "text/x-mssql",
+				theme: "neat",
+				readOnly: true
+			});
+	</script>
+}
 
 @section Scripts {
 	@Scripts.Render("~/bundles/jqueryval")

@@ -48,6 +48,7 @@ namespace octopus.Controllers
 
 			if (result != null)
 			{
+				FormsAuthentication.SetAuthCookie(result.Name, true);
 				return RedirectToAction("Index", "Home");
 			}
 			else
@@ -84,7 +85,6 @@ namespace octopus.Controllers
 				}
 				else
 				{
-					FormsAuthentication.SetAuthCookie(newAccount.Name, true);
 					_dbContext.Accounts.Add(newAccount);
 					_dbContext.SaveChanges();
 					return RedirectToAction("Index", "Home");
