@@ -100,6 +100,7 @@ namespace octopus.DAL.WorkerHelpers
 			try
 			{
 				var adapter = new SqlDataAdapter(_query.Sql, database.ConnectionString);
+				adapter.SelectCommand.CommandTimeout = 0;
 				var table = new DataTable();
 				adapter.Fill(table);
 
