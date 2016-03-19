@@ -34,27 +34,61 @@
 		</div>
 	</div>
 
+	@if (Model.SingleTable)
+	{
+		@Html.Raw("<table class='table query_result'>")
+
+		<tr>
+			@if (Model.SingleTable)
+			{
+				<th>Country</th>
+			}
+			@foreach (var column in Model.Results.First().Columns)
+			{
+				<th>@column</th>
+			}
+		</tr>
+	}
+
 	@foreach (var result in Model.Results)
 	{
-		<h3>@result.DatabaseId</h3>
+		if (!Model.SingleTable)
+		{
+			<h3>@result.DatabaseId</h3>
 
-		<table class="table query_result">
+			@Html.Raw("<table class='table query_result'>")
+
 			<tr>
 				@foreach (var column in result.Columns)
 				{
 					<th>@column</th>
 				}
 			</tr>
-			@foreach (var row in result.Rows)
-			{
-				<tr>
-					@foreach(var val in row)
-					{
-						<td>@val</td>
-					}
-				</tr>
-			}
-		</table>
+		}
+
+		foreach (var row in result.Rows)
+		{
+			<tr>
+				@if(Model.SingleTable)
+				{
+					<td>@result.DatabaseId</td>
+				}
+				@foreach (var val in row)
+				{
+					<td>@val</td>
+				}
+			</tr>
+		}
+
+		if(!Model.SingleTable)
+		{
+			@Html.Raw("</table>")
+		}
+	}
+
+	@if (Model.SingleTable)
+	{
+		@Html.Raw("</table>")
 	}
 </div>
 

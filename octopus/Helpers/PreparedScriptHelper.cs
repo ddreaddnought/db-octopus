@@ -49,6 +49,9 @@ namespace octopus.Helpers
 				.FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Extract params from sql script
+		/// </summary>
 		public static List<UserQueryParamModel> PrepareParams(string sql)
 		{
 			var matches = Regex
@@ -60,11 +63,13 @@ namespace octopus.Helpers
 				.ToList();
 		}
 
+		/// <summary>
+		/// Create sql query using param values
+		/// </summary>
 		public static string SetParams(string sql, List<UserQueryParamModel> param)
 		{
-			var prepared = PrepareParams(sql);
 			var sqlWithParams = sql;
-			for(int i = 0; i < prepared.Count; i++)
+			for(int i = 0; i < param.Count; i++)
 			{
 				double fake = 0;
 				string paramValue = string.Empty;
@@ -72,7 +77,7 @@ namespace octopus.Helpers
 					paramValue = param[i].Value;
 				else
 					paramValue = string.Format("'{0}'", param[i].Value.Replace("'", "''"));
-				sqlWithParams = sqlWithParams.Replace(string.Format("{{{0}}}", prepared[i].Name), paramValue);
+				sqlWithParams = sqlWithParams.Replace(string.Format("{{{0}}}", param[i].Name), paramValue);
 			}
 			return sqlWithParams;
 		}

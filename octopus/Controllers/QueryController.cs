@@ -18,12 +18,15 @@ namespace octopus.Controllers
         public ActionResult Execute(UserQueryViewModel userQuery)
         {
 			SqlQuery query = new SqlQuery();
-			query.PreparedScriptName = PreparedScriptHelper.Get(userQuery.PreparedScriptId).Name;
+			var preparedScript = PreparedScriptHelper.Get(userQuery.PreparedScriptId);
+				if(preparedScript != null)
+			query.PreparedScriptName = preparedScript.Name;
 			query.Databases = userQuery.Databases;
 			query.Sql = PreparedScriptHelper.SetParams(userQuery.Sql, userQuery.Params);
 
 			query.UserId = UserHelper.GetUserId(User.Identity);
 			query.DateStart = DateTime.Now;
+			query.SingleTable = userQuery.SingleTable;
 			_dbContext.Queries.Add(query);
 			_dbContext.SaveChanges();
 

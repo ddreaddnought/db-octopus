@@ -36,6 +36,13 @@
 		</div>
 
 		<div class="form-group">
+			@Html.LabelFor(m => m.SingleTable, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.CheckBoxFor(m => m.SingleTable, new { htmlAttributes = new { @class = "form-control" } })
+			</div>
+		</div>
+
+		<div class="form-group">
 			@Html.LabelFor(m => m.Sql, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
 				@Html.TextAreaFor(m => m.Sql, new { id = "query" } )
@@ -48,6 +55,7 @@
 			{
 				<div class="form-group">
 					@Html.Label(Model.Params[i].Name, htmlAttributes: new { @class = "control-label col-md-2" })
+					@Html.HiddenFor(m => m.Params[i].Name)
 					<div class="col-md-10">
 						@Html.TextBoxFor(m => m.Params[i].Value, new { id = "query" })
 					</div>

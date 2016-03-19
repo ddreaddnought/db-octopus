@@ -18,5 +18,6 @@ namespace octopus.Models
 		public string Sql { get; set; }
 		public int PreparedScriptId { get; set; }
 		public List<UserQueryParamModel> Params { get; set; }
+		public bool SingleTable { get; set; }
 	}
 }

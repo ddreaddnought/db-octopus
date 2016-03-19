@@ -33,5 +33,8 @@ namespace octopus.DAL
 
 		[Column("sql")]
 		public string Sql { get; set; }
+
+		[Column("single_table")]
+		public bool SingleTable { get; set; }
 	}
 }

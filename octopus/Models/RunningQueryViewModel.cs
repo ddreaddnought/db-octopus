@@ -19,6 +19,7 @@ namespace octopus.Models
 			UserId = baseModel.UserId;
 			DateStart = baseModel.DateStart;
 			DateEnd = baseModel.DateEnd;
+			SingleTable = baseModel.SingleTable;
 
 			Done = DateEnd.HasValue && DateEnd > DateStart;
 
