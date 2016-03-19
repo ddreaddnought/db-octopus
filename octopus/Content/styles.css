@@ -1,4 +1,32 @@
-﻿.query_result 
+﻿.left {
+	float: left;
+}
+
+.query_result 
 {
 	font-size: 12px;
+}
+
+.query_result td, th {
+	border: 1px solid #ddd;
+}
+
+a.raw
+{
+    background: url(/Content/img/raw.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+	 background-size: 32px 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.save
+{
+    background: url(/Content/img/save.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+	 background-size: 32px 32px;
+     text-indent: -9999px; /* hides the link text */
 }

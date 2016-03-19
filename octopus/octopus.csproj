@@ -160,6 +160,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\raw.png" />
+    <Content Include="Content\img\save.png" />
     <Content Include="Content\img\spinner.gif" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
@@ -456,7 +458,6 @@
     <Content Include="Views\Script\Index.cshtml" />
     <Content Include="Views\Script\Edit.cshtml" />
     <Content Include="Views\Script\Delete.cshtml" />
-    <Content Include="Views\Script\Execute.cshtml" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
   </ItemGroup>
   <ItemGroup>

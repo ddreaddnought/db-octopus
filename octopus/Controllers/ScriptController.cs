@@ -88,6 +88,9 @@ namespace octopus.Controllers
 			if(id.HasValue)
 				script = GetScriptById(id.Value);
 
+			if (script == null || script.UserId != UserHelper.GetUserId(User.Identity))
+				return RedirectToAction("Index");
+
 			return View(script);
         }
 
@@ -97,6 +100,9 @@ namespace octopus.Controllers
         public ActionResult Delete(int id)
         {
 			var script = GetScriptById(id);
+
+			if (script == null || script.UserId != UserHelper.GetUserId(User.Identity))
+				return RedirectToAction("Index");
 
 			return View(script);
         }
@@ -109,53 +115,14 @@ namespace octopus.Controllers
 		public ActionResult Delete(int id, FormCollection collection)
 		{
 			var script = GetScriptById(id);
+
+			if (script == null || script.UserId != UserHelper.GetUserId(User.Identity))
+				return RedirectToAction("Index");
+
 			_dbContext.PreparedScripts.Remove(script);
 			_dbContext.SaveChanges();
 
 			return RedirectToAction("Index");
-		}
-
-		/// <summary>
-		/// Open script execution page
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public ActionResult Execute(int id)
-		{
-			var script = GetScriptById(id);
-
-			var executeScript = new ExecuteScriptViewModel();
-			executeScript.Name = script.Name;
-
-			return View("Execute", executeScript);
-		}
-
-		/// <summary>
-		/// Execute script
-		/// </summary>
-		[HttpPost]
-		public ActionResult Execute(int id, ExecuteScriptViewModel executeScript)
-		{
-			if (!string.IsNullOrEmpty(executeScript.Databases))
-			{
-				var script = GetScriptById(id);
-
-				var sqlQuery = new SqlQuery();
-				sqlQuery.Databases = executeScript.Databases;
-				sqlQuery.PreparedScriptName = script.Name;
-				sqlQuery.Sql = script.Sql;
-				sqlQuery.DateStart = DateTime.Now;
-				sqlQuery.UserId = UserHelper.GetUserId(User.Identity);
-
-				_dbContext.Queries.Add(sqlQuery);
-				_dbContext.SaveChanges();
-
-				Worker.ExecuteQuery(sqlQuery);
-
-				return RedirectToAction("Execute", "Query", new { id = sqlQuery.Id });
-			}
-			else
-				return View(executeScript);
 		}
 	}
 }

@@ -29,12 +29,23 @@
 		<div class="form-group">
 			@Html.LabelFor(m => m.Sql, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.TextAreaFor(m => m.Sql, new { id = "query", rows = "20", Class = "sql_input" })
+				@Html.TextAreaFor(m => m.Sql, new { id = "query", rows = 20, Class = "sql_input" })
 			</div>
 		</div>
+		@if(Model.Done)
+		{ 
+			<div class="form-group">
+				<div class="left">
+					@Html.ActionLink("Query", "Raw", new { id = Model.Id }, new { @class = "raw" })
+				</div>
+				<div class="left">
+					@Html.ActionLink("Query", "Save", new { id = Model.Id }, new { @class = "save" })
+				</div>
+			</div>
+		}
 	</div>
 
-	@if (Model.SingleTable)
+	@if (Model.SingleTable && Model.Results.Count > 0)
 	{
 		@Html.Raw("<table class='table query_result'>")
 
