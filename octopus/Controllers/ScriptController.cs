@@ -88,7 +88,7 @@ namespace octopus.Controllers
 			if(id.HasValue)
 				script = GetScriptById(id.Value);
 
-			if (script == null || script.UserId != UserHelper.GetUserId(User.Identity))
+			if (id != null && (script == null || script.UserId != UserHelper.GetUserId(User.Identity)))
 				return RedirectToAction("Index");
 
 			return View(script);
