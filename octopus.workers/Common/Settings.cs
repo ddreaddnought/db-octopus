@@ -5,7 +5,7 @@ namespace octopus.workers.Common
 	/// <summary>
 	/// Worker settings collection
 	/// </summary>
-	class Settings
+	public class Settings
 	{
 		/// <summary>
 		/// Settings storage
