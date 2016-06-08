@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octopus", "octopus\octopus.csproj", "{7C256DAE-8F0C-4E32-A984-ADBC329E46C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octopus.DAL", "octopus.DAL\octopus.DAL.csproj", "{C71639D2-262F-4BA1-A106-4DC25066BFEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octopus.workers", "octopus.workers\octopus.workers.csproj", "{5186FEAB-9A39-4491-B820-63BCC8DBC446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octopus.portable", "octopus.portable\octopus.portable.csproj", "{14003580-01FF-4B2B-8185-CC164BD7DC7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{C71639D2-262F-4BA1-A106-4DC25066BFEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C71639D2-262F-4BA1-A106-4DC25066BFEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C71639D2-262F-4BA1-A106-4DC25066BFEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5186FEAB-9A39-4491-B820-63BCC8DBC446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5186FEAB-9A39-4491-B820-63BCC8DBC446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5186FEAB-9A39-4491-B820-63BCC8DBC446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5186FEAB-9A39-4491-B820-63BCC8DBC446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14003580-01FF-4B2B-8185-CC164BD7DC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14003580-01FF-4B2B-8185-CC164BD7DC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14003580-01FF-4B2B-8185-CC164BD7DC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14003580-01FF-4B2B-8185-CC164BD7DC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
